@@ -9,7 +9,10 @@ const app  = express();
 const PORT = process.env.PORT || 3000;
 
 // ── Middleware ───────────────────────────────────────────────
-app.use(cors()); // Permite Angular
+app.use(cors({
+  origin: ['https://kuvu.vercel.app', 'http://localhost:4200'],
+  credentials: true
+})); // Permite Angular
 app.use(express.json());
 
 // ── Rutas ────────────────────────────────────────────────────
