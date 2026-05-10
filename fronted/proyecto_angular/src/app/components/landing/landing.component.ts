@@ -40,7 +40,7 @@ export class LandingComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.http.get<Empresa[]>('http://localhost:3000/api/empresas')
+    this.http.get<Empresa[]>('https://kuvu-production.up.railway.app/api/empresas')
       .subscribe({
         next:  (data) => { this.empresas.set(data); this.cargando.set(false); },
         error: ()     => this.cargando.set(false)
