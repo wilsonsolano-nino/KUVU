@@ -84,12 +84,19 @@ Sitio multipágina con una sola navegación: `/`, `/servicios`, `/nosotros`,
 
 ### Clúster autenticado (app de gestión)
 
-- `components/landing/` (`/acceder`) — selección de inmobiliaria, orquesta la intro.
+- `components/landing/` (`/acceder`) — selección de inmobiliaria (empresas en orden de `id`),
+  orquesta la intro.
+- `components/shared/auth-intro/` — intro "hoja que pasa" (~2,9 s, CSS 3D con 6 franjas anidadas,
+  salto por clic/teclado/botón). Detalle en `docs/acceso-orden-e-intro.md`.
+- `src/app/intro-view-transition.ts` — hook `onViewTransitionCreated` del router: saltea el
+  cross-fade de View Transitions al entrar a `/acceder` con la intro pendiente.
 - `components/login/` (`/login`) — credenciales de la empresa seleccionada (correo + documento).
 - `components/dashboard|locales|contratos|pagos|mantenimiento|usuarios/` — módulos de gestión,
   lazy, protegidos por `authGuard`/`adminGuard`.
 - `services/auth.service.ts`, `data.service.ts`, `intro-state.service.ts` — sesión, datos
-  (mock) y estado de la intro.
+  (mock) y estado de la intro (recordada por pestaña en `sessionStorage['kuvu.intro.seen']`).
+- `services/page-turn-sound.service.ts` — sonido de la intro sintetizado con Web Audio, sin
+  archivos; no crea contexto sin un gesto previo del usuario.
 
 ## Capas
 
@@ -125,7 +132,7 @@ fragmento lleva a su sección con el offset de `scroll-offset.ts`.
 ### Acceso autenticado
 
 ```
-Usuario → '/acceder' (selección de empresa, lazy) → '/login' (correo + documento, lazy)
+Usuario → '/acceder' (lazy; intro la primera vez en la pestaña → selección de empresa) → '/login' (correo + documento, lazy)
   → dashboard / contratos / pagos / mantenimiento (/ locales, /usuarios si admin)
 ```
 

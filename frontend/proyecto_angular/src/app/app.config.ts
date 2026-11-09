@@ -15,6 +15,7 @@ import {
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { routes } from './app.routes';
 import { headerScrollOffset } from './scroll-offset';
+import { skipViewTransitionIntoIntro } from './intro-view-transition';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,7 +23,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withComponentInputBinding(),
-      withViewTransitions(),
+      // Entering the intro skips the router cross-fade (see intro-view-transition.ts).
+      withViewTransitions({ onViewTransitionCreated: skipViewTransitionIntoIntro }),
       // New page → top of the page; `/legal#cookies` → its section.
       withInMemoryScrolling({ scrollPositionRestoration: 'top', anchorScrolling: 'enabled' })
     ),

@@ -42,7 +42,7 @@ describe('LegalComponent', () => {
 
   it('should show the effective date', () => {
     const updated = root.querySelector('.legal-updated') as HTMLElement;
-    expect(updated.textContent).toContain('Última actualización: 18 de octubre de 2026');
+    expect(updated.textContent).toContain('Última actualización: 8 de noviembre de 2026');
     expect(updated.querySelector('mark')).toBeNull();
   });
 
@@ -105,7 +105,8 @@ describe('LegalComponent', () => {
 
   it('should list the browser storage in the cookies section', () => {
     const items = Array.from(root.querySelectorAll('#cookies li')).map((li) => li.textContent ?? '');
-    expect(items.length).toBe(3);
+    expect(items.length).toBe(4);
     expect(items[0]).toContain('Preferencia de tema');
+    expect(items[3]).toContain('Intro vista');
   });
 });

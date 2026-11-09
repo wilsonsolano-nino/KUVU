@@ -333,7 +333,8 @@ const terms: LegalDocument = {
 export const browserStorageUses: readonly string[] = [
   'Preferencia de tema',
   'Sesión iniciada',
-  'Empresa preseleccionada'
+  'Empresa preseleccionada',
+  'Intro vista'
 ];
 
 const cookies: LegalDocument = {
@@ -361,6 +362,10 @@ const cookies: LegalDocument = {
         [
           'Empresa preseleccionada: recuerda la inmobiliaria elegida en la pantalla de acceso ',
           'hasta iniciar sesión (almacenamiento de la sesión del navegador).'
+        ],
+        [
+          'Intro vista: recuerda que ya viste la introducción de la pantalla de acceso, para no ',
+          'repetirla en esa pestaña (almacenamiento de la sesión del navegador).'
         ]
       ]
     },

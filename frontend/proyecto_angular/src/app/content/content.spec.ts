@@ -322,7 +322,7 @@ describe('content modules', () => {
       expect(responsible.phone).toBe('+57 322 319 2760');
       expect(responsible.phone.replace(/\D/g, '')).toBe(contact.whatsappNumber);
       expect(responsible.attentionArea).toBe('Equipo KUVU — Protección de datos personales');
-      expect(responsible.effectiveDate).toBe('18 de octubre de 2026');
+      expect(responsible.effectiveDate).toBe('8 de noviembre de 2026');
     });
 
     it('should not invent a tax id, a physical address or an email', () => {
@@ -472,7 +472,8 @@ describe('content modules', () => {
       expect(browserStorageUses).toEqual([
         'Preferencia de tema',
         'Sesión iniciada',
-        'Empresa preseleccionada'
+        'Empresa preseleccionada',
+        'Intro vista'
       ]);
       const text = plainOf(docById('cookies'));
       browserStorageUses.forEach((name) => expect(text).toContain(name));

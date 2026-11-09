@@ -15,7 +15,7 @@ export const responsible: Responsible = {
   // Same number as the WhatsApp already published in site.ts.
   phone: '+57 322 319 2760',
   attentionArea: 'Equipo KUVU — Protección de datos personales',
-  effectiveDate: '18 de octubre de 2026'
+  effectiveDate: '8 de noviembre de 2026'
 };
 
 /** Kind of piece a rich text resolves to once the responsible data is applied. */

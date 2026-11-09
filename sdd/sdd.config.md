@@ -4,7 +4,7 @@
 
 - **Proyecto:** KUVU
 - **Idioma de trabajo:** español
-- **Stack:** Angular 21 + Tailwind CSS v4 / Node.js backend / PostgreSQL
+- **Stack:** Angular 21 + Tailwind CSS v4 / Node.js + Express (API REST `/api/*` consumida por el SPA) / MariaDB 10.4 en Docker (contenedor `kuvu_db`)
 
 ## Extensiones activas
 
@@ -17,10 +17,12 @@
 
 | Orden | Slice | Qué cubre | Obligatorio |
 |---|---|---|---|
-| 1 | `contenido` | Módulos de contenido del sitio público (`content/*.ts`) + tests de contenido | Sí, si el cambio toca textos o datos del sitio |
-| 2 | `chrome` | Chrome compartido del sitio: `PageMetaService`, `app.config.ts`, `index.html`, `styles.scss`, header, footer, `app-public-page`, `app-rich-text`, `app-service-icon` | Sí, si el cambio toca piezas compartidas |
-| 3 | `paginas` | Páginas públicas internas (`components/pages/*`) + rutas lazy (`app.routes.ts`) | Sí, si el cambio agrega o modifica páginas |
-| 4 | `home` | Home (`components/home/`) y migración de páginas existentes al chrome compartido | Sí, si el cambio toca la home |
+| 1 | `backend-orden` | Rutas del backend Express (`backend/routes/`) + tests `node --test` | Sí, si el cambio toca el backend |
+| 2 | `contenido` | Módulos de contenido del sitio público (`content/*.ts`) + tests de contenido | Sí, si el cambio toca textos o datos del sitio |
+| 3 | `chrome` | Chrome compartido del sitio: `PageMetaService`, `app.config.ts`, `index.html`, `styles.scss`, header, footer, `app-public-page`, `app-rich-text`, `app-service-icon` | Sí, si el cambio toca piezas compartidas |
+| 4 | `paginas` | Páginas públicas internas (`components/pages/*`) + rutas lazy (`app.routes.ts`) | Sí, si el cambio agrega o modifica páginas |
+| 5 | `home` | Home (`components/home/`) y migración de páginas existentes al chrome compartido | Sí, si el cambio toca la home |
+| 6 | `intro` | Frontend Angular del acceso: `/acceder`, intro, `/login`, servicios de `src/app/services/` + tests Karma | Sí, si el cambio toca el acceso o sus servicios |
 | — | `cierre` | Config SDD (`sdd.config.md`, `sdd-init.md`) al último slice | Sí |
 
 Orden por dependencia: `home` va después de `paginas` cuando la home enlaza páginas nuevas.
@@ -35,6 +37,8 @@ Comandos de test:
 - `frontend`: en Windows, fijar el binario de Chrome antes de correr:
   `$env:CHROME_BIN='C:\Program Files\Google\Chrome\Application\chrome.exe'`, luego
   `npx ng test --watch=false --browsers=ChromeHeadless` desde `frontend/proyecto_angular`.
+- `backend`: `npm test` desde `backend/` (`node --test`, sin base de datos: los tests de rutas
+  reemplazan `db` por un doble).
 
 ## Documentación
 
