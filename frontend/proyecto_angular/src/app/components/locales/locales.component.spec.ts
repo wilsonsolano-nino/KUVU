@@ -45,6 +45,20 @@ describe('LocalesComponent', () => {
     expect(eliminar.classList).toContain('btn-action--danger');
     expect(eliminar.querySelector('app-icon svg')).not.toBeNull();
     expect(fila.textContent).toContain('Wilson Solano');
+    expect(fila.querySelector('.monto')!.textContent!.replace(/\s/g, ' ')).toContain('$ 1.500.000');
+  });
+
+  it('shows a skeleton instead of the empty state while the data loads (R6.3)', () => {
+    d.data.esperandoDatos.set(true);
+    d.data.locales.set([]);
+    fixture.detectChanges();
+    expect(el().querySelector('app-skeleton')).not.toBeNull();
+    expect(el().querySelector('table')).toBeNull();
+
+    d.data.esperandoDatos.set(false);
+    fixture.detectChanges();
+    expect(el().querySelector('app-skeleton')).toBeNull();
+    expect(el().querySelector('td.empty')!.textContent).toContain('No hay locales registrados');
   });
 
   describe('delete', () => {

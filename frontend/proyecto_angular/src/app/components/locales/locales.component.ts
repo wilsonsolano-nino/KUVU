@@ -7,14 +7,17 @@ import { DataService } from '../../services/data.service';
 import { Local } from '../../models/index';
 import { AppLayoutComponent } from '../shared/app-layout/app-layout.component';
 import { ModalComponent } from '../shared/modal/modal.component';
+import { SkeletonComponent } from '../shared/skeleton/skeleton.component';
+import { StaggerDirective } from '../shared/stagger.directive';
 import { IconComponent } from '../shared/icon/icon.component';
 import { ConfirmService } from '../shared/confirm/confirm.service';
 import { ToastService } from '../shared/toast/toast.service';
+import { formatMoneda } from '../shared/formato';
 
 @Component({
   selector: 'app-locales',
   standalone: true,
-  imports: [CommonModule, FormsModule, AppLayoutComponent, ModalComponent, IconComponent],
+  imports: [CommonModule, FormsModule, AppLayoutComponent, ModalComponent, IconComponent, SkeletonComponent, StaggerDirective],
   templateUrl: './locales.component.html',
   styleUrls: ['./locales.component.scss']
 })
@@ -143,8 +146,6 @@ export class LocalesComponent implements OnInit {
   }
 
   formatCurrency(value: number = 0): string {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency', currency: 'COP', maximumFractionDigits: 0
-    }).format(value);
+    return formatMoneda(value);
   }
 }
